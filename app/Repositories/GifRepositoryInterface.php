@@ -6,7 +6,7 @@ use App\Http\Requests\Gif\GifFavoriteRequest;
 
 interface GifRepositoryInterface
 {
-    public function searchByText(array $data);
-    public function searchByID(string $gif_id);
-    public function saveFavorite(GifFavoriteRequest $request);
+    public function searchByText(array $data): array;
+    public function searchByID(string $gif_id): array;
+    public function saveFavorite(GifFavoriteRequest $request): void;
 }
