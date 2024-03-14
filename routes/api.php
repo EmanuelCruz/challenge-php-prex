@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/gifs', [GifController::class, 'searchByText'])->name('gifs.searchByText');
+Route::get('/gifs/{id}', [GifController::class, 'searchByID'])->name('gifs.searchByID');

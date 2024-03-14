@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Gif\GifRequest;
 use App\Repositories\GifRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use App\Http\Requests\Gif\GifFavoriteRequest;
 
 class GifController extends Controller
 {
@@ -25,4 +26,9 @@ class GifController extends Controller
         return response()->json($result);
     }
 
+    public function searchByID(string $id): JsonResponse
+    {
+        $result = $this->gifRepository->searchById($id);
+        return response()->json($result);
+    }
 }

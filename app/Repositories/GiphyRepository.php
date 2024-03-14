@@ -18,4 +18,15 @@ class GiphyRepository implements GifRepositoryInterface
         $response = Http::withQueryParameters($queryParams)->get($url);
         return $response->json();
     }
+
+    public function searchByID(string $id): array
+    {
+        $urlParams = ['id' => $id];
+        $queryParams = [
+            'api_key' => config('giphy.api_key')
+        ];
+        $url = config('giphy.url.search-by-id');
+        $response = Http::withUrlParameters($urlParams)->withQueryParameters($queryParams)->get($url);
+        return $response->json();
+    }
 }
