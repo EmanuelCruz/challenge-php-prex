@@ -36,7 +36,7 @@ class GiphyRepository implements GifRepositoryInterface
     public function saveFavorite(GifFavoriteRequest $request): void
     {
         $data = $request->validated();
-        $favorite = Favorite::created($data);
+        $favorite = Favorite::create($request->createFavoriteData());
         $user = User::find($data['user_id']);
         $user->favorites()->attach($favorite['id']);
     }
