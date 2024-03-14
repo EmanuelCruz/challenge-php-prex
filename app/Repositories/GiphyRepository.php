@@ -2,6 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\Gif\GifFavoriteRequest;
+use App\Models\Favorite;
+use App\Models\User;
 use Illuminate\Support\Facades\Http;
 
 class GiphyRepository implements GifRepositoryInterface
@@ -28,5 +31,13 @@ class GiphyRepository implements GifRepositoryInterface
         $url = config('giphy.url.search-by-id');
         $response = Http::withUrlParameters($urlParams)->withQueryParameters($queryParams)->get($url);
         return $response->json();
+    }
+
+    public function saveFavorite(GifFavoriteRequest $request): void
+    {
+        $data = $request->validated();
+        $favorite = Favorite::created($data);
+        $user = User::find($data['user_id']);
+        $user->favorites()->attach($favorite['id']);
     }
 }

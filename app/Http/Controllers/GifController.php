@@ -6,6 +6,7 @@ use App\Http\Requests\Gif\GifRequest;
 use App\Repositories\GifRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\Gif\GifFavoriteRequest;
+use App\Models\Favorite;
 
 class GifController extends Controller
 {
@@ -20,9 +21,7 @@ class GifController extends Controller
     public function searchByText(GifRequest $request): JsonResponse
     {
         $data = $request->validated();
-
         $result = $this->gifRepository->searchByText($data);
-
         return response()->json($result);
     }
 
@@ -30,5 +29,10 @@ class GifController extends Controller
     {
         $result = $this->gifRepository->searchById($id);
         return response()->json($result);
+    }
+
+    public function saveFavorite(GifFavoriteRequest $request): void
+    {
+        $this->gifRepository->saveFavorite($request);
     }
 }
