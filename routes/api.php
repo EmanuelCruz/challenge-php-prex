@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/gifs', [GifController::class, 'searchByText'])->name('gifs.searchByText');
-Route::get('/gifs/{id}', [GifController::class, 'searchByID'])->name('gifs.searchByID');
-Route::post('/gifs/favorite', [GifController::class, 'saveFavorite'])->name('gifs.saveFavorite');
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('gifs', [GifController::class, 'searchByText'])->name('gifs.searchByText');
+    Route::get('gifs/{id}', [GifController::class, 'searchByID'])->name('gifs.searchByID');
+    Route::post('gifs/favorite', [GifController::class, 'saveFavorite'])->name('gifs.saveFavorite');
+});
