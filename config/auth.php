@@ -43,6 +43,7 @@ return [
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
+            'expire_in' => env('PASSPORT_EXPIRE_IN', 30),
         ],
     ],
 
