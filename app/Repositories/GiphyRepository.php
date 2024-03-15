@@ -14,8 +14,8 @@ class GiphyRepository implements GifRepositoryInterface
         $queryParams = [
             'api_key' => config('giphy.api_key'),
             'q' => $data['query'],
-            'limit' => $data['limit'],
-            'offset' => $data['offset'],
+            'limit' => $data['limit'] ?? null,
+            'offset' => $data['offset'] ?? null,
         ];
         $url = config('giphy.url.search');
         $response = Http::withQueryParameters($queryParams)->get($url);

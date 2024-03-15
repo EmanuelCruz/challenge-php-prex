@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class AuthRepository implements AuthRepositoryInterface
 {
 
-    protected $controller = new Controller();
+    protected $controller;
+
+    public function __construct(Controller $controller)
+    {
+        $this->controller = $controller;
+    }
 
     public function register(AuthRequest $request): JsonResponse
     {
