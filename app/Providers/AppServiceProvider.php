@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Repositories\AuthRepository;
-use App\Repositories\AuthRepositoryInterface;
+use App\Repositories\GifRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\GifRepositoryInterface;
-use App\Repositories\GiphyRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,8 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(GifRepositoryInterface::class, GiphyRepository::class);
-        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+        $this->app->bind(GifRepositoryInterface::class, GifRepository::class);
     }
 
     /**
