@@ -2,12 +2,16 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Gif\GifFavoriteRequest;
 use App\Models\Favorite;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
-class GiphyRepository implements GifRepositoryInterface
+class GifRepository implements GifRepositoryInterface
 {
     public function searchByText(array $data): array
     {

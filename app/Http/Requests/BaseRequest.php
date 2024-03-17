@@ -10,9 +10,6 @@ use Illuminate\Http\Response;
 
 class BaseRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
@@ -22,7 +19,9 @@ class BaseRequest extends FormRequest
     {
         throw new HttpResponseException(
             response()->json([
-                'errors' => $validator->errors()
+                'success' => false,
+                'message' => 'Validation failed',
+                'data' => $validator->errors()
             ], Response::HTTP_UNPROCESSABLE_ENTITY)
         );
     }

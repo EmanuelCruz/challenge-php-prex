@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Gif;
 
 use App\Http\Requests\BaseRequest;
-use Illuminate\Support\Collection;
 
 class GifFavoriteRequest extends BaseRequest
 {
@@ -17,13 +16,13 @@ class GifFavoriteRequest extends BaseRequest
         return [
             'gif_id' => 'required|string',
             'alias'  => 'required|string',
-            'user_id' => 'required|integer',
+            'user_id' => 'required|integer|exists:users,id',
         ];
     }
 
     public function createFavoriteData(): array
     {
-        $validated = new Collection(parent::validated());
+        $validated = collect(parent::validated());
         return $validated->only(['gif_id', 'alias'])->toArray();
     }
 }
