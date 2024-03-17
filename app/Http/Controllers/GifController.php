@@ -3,46 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Gif\GifRequest;
-use App\Repositories\GifRepositoryInterface;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\Gif\GifFavoriteRequest;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
+use App\Services\GifService;
 
 class GifController extends Controller
 {
-
-    private $gifRepository;
-
-    public function __construct(GifRepositoryInterface $gifRepository)
+    public function __construct(private GifService $gifService)
     {
-        $this->gifRepository = $gifRepository;
+        $this->gifService = $gifService;
     }
 
-    public function searchByText(GifRequest $request): JsonResponse
+    public function searchGifs(GifRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $result = $this->gifRepository->searchByText($data);
-        return response()->json($result);
+        $gifs = $this->gifService->searchGifs($data);
+        return response()->json($gifs);
     }
 
-    public function searchByID(string $id): JsonResponse
+    public function searchGifById(string $id): JsonResponse
     {
-        $result = $this->gifRepository->searchById($id);
-        return response()->json($result);
-    }
-
-    public function saveFavorite(GifFavoriteRequest $request): JsonResponse
-    {
-        DB::beginTransaction();
-        try {
-            $this->gifRepository->saveFavorite($request);
-            DB::commit();
-            return $this->sendError($message, [], Response::HTTP_INTERNAL_SERVER_ERROR);
-        } catch (\Throwable $th) {
-            DB::rollback();
-            $message = $th->getMessage();
-            return $this->sendError($message, [], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        $gif = $this->gifService->searchGifById($id);
+        return response()->json($gif);
     }
 }

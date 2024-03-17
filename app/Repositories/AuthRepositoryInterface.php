@@ -2,11 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\Auth\AuthRequest;
-use Illuminate\Http\JsonResponse;
+use App\Models\User;
 
 interface AuthRepositoryInterface
 {
-    public function register(AuthRequest $request): JsonResponse;
-    public function login(AuthRequest $request): JsonResponse;
+    public function create(array $data): User;
+    public function findByEmail(string $email): ?User;
 }

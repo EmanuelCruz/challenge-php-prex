@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\GifController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,15 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('gifs', [GifController::class, 'searchByText'])->name('gifs.searchByText');
-    Route::get('gifs/{id}', [GifController::class, 'searchByID'])->name('gifs.searchByID');
-    Route::post('gifs/favorite', [GifController::class, 'saveFavorite'])->name('gifs.saveFavorite');
+    Route::get('gifs', [GifController::class, 'searchGifs'])->name('gifs.searchGifs');
+    Route::get('gifs/{id}', [GifController::class, 'searchGifById'])->name('gifs.searchGifById');
+    Route::post('gifs/favorite', [FavoriteController::class, 'saveFavorite'])->name('gifs.saveFavorite');
 });

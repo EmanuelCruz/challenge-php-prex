@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Repositories\AuthRepository;
 use App\Repositories\AuthRepositoryInterface;
+use App\Services\AuthService;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -17,7 +18,10 @@ class AuthServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+        // $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+        $this->app->bind(AuthService::class, function ($app) {
+            return new AuthService($app->make(AuthRepository::class));
+        });
     }
 
     /**

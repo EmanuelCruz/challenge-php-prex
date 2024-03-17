@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Gif;
+namespace App\Http\Requests\Favorite;
 
-use App\Http\Requests\BaseRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class GifFavoriteRequest extends BaseRequest
+class FavoriteRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
