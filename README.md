@@ -15,6 +15,7 @@ deberán entregar distintos diagramas que representen la solución.
 ## Requisitos Previos
 
 - Docker: como mínimo hay que tenerlo instalado
+- Api Key Giphy: Es necesario hacerte una cuenta en GIPHY Developers
 
 ## Levantar API
 
@@ -29,7 +30,14 @@ git clone https://github.com/EmanuelCruz/challenge-php-prex.git
 ```bash
 cp env.example .env
 ```
-3. Instalar librerías Composer, necesario para levantar ambiente con Laravel Sail
+
+3. Agregar el api key de Giphy developer en el `.env`
+
+```env
+GIPHY_API_KEY=api-key
+```
+
+4. Instalar librerías Composer, necesario para levantar ambiente con Laravel Sail
 
 ```bash
 docker run --rm \
@@ -41,7 +49,7 @@ docker run --rm \
 ```
 Este contenedor utilizara PHP 8.2 y Composer para instalar la librerías
 
-4. Levantar ambiente con Laravel Sail
+5. Levantar ambiente con Laravel Sail
 
 ```bash
 ./vendor/bin/sail up
@@ -53,7 +61,7 @@ En caso de utilizar Windows y que el comando no funcione, utilizar:
 .\vendor\bin\sail up
 ```
 
-5. Agregar el nombre de host a nuestro sistema
+6. Agregar el nombre de host a nuestro sistema
 
     - Abrir el archivo de hosts
     ```bash
@@ -63,19 +71,19 @@ En caso de utilizar Windows y que el comando no funcione, utilizar:
     ```bash
     127.0.0.1       challenge-php-prex.test
     ```
-6. Instalar librerías NPM
+7. Instalar librerías NPM
 
 ```bash
 ./vendor/bin/sail npm install
 ```
 
-7. Ejecutar las migraciones
+8. Ejecutar las migraciones
 
 ```bash
 ./vendor/bin/sail artisan migrate
 ```
 
-8. Configuración de passport (seleccionar los valores por defecto)
+9. Configuración de passport (seleccionar los valores por defecto)
 
 ```bash
 ./vendor/bin/sail artisan passport:install
