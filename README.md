@@ -90,7 +90,13 @@ Para hacer la pruebas en Postman, existe un archivo (.json) en la carpeta `./doc
 Para probar los feature test ejecutar el siguiente comando
 
 ```bash
-sail artisan test --testsuite=Feature --stop-on-failure
+./vendor/bin/sail artisan test --parallel --recreate-databases
+```
+
+Y si se requiere puede ver el coverage de testing
+
+```bash
+./vendor/bin/sail artisan test --coverage
 ```
 
 ## Datos para conectarse a la DB desde un gestor de DBs
