@@ -1,0 +1,36 @@
+@startuml
+actor Usuario
+participant "api.php" as Api
+participant "FavoriteController" as Controller
+participant "FavoriteRequest" as Request
+participant "FavoriteService" as Service
+participant "FavoriteRepository" as Repository
+participant "DB" as DB
+
+activate Usuario
+Usuario -> Api: Guardar GIF favorito (POST api/gifs/favorite)
+activate Api
+Api -> Controller: Llama a FavoriteController@saveFavorite()
+activate Controller
+Controller -> Request: Valida datos con FavoriteRequest
+activate Request
+Request --> Controller: Datos validados
+deactivate Request
+Controller -> Service: Llama a FavoriteService@saveFavorite()
+activate Service
+Service -> Repository: Llama a FavoriteRepository@create()
+activate Repository
+Repository -> DB: guardar favorito
+activate DB
+DB --> Repository: Retorna moelo Favorite creado
+deactivate DB
+Repository --> Service: Retorna respuesta del repositorio
+deactivate Repository
+Service --> Controller: Retorna true o exepción al Controller
+deactivate Service
+Controller --> Api: Retorna respuesta al API
+deactivate Controller
+Api --> Usuario: Retorna respuesta al usuario
+deactivate Api
+deactivate Usuario
+@enduml

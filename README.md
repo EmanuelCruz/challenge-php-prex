@@ -107,6 +107,10 @@ Y si se requiere puede ver el coverage de testing
 ./vendor/bin/sail artisan test --coverage
 ```
 
+## Diagramas
+
+Los diagramas de Casos de Uso, Secuencia, y DER, se encuentran en `docs/diagrams/diagramas.docx`
+
 ## Datos para conectarse a la DB desde un gestor de DBs
 
 ```bash

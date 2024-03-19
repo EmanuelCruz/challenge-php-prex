@@ -1,0 +1,36 @@
+@startuml
+actor Usuario
+participant "api.php" as Api
+participant "GifController" as Controller
+participant "GifRequest" as Request
+participant "GifService" as Service
+participant "GifRepository" as Repository
+participant "API GIPHY" as GiphyAPI
+
+activate Usuario
+Usuario -> Api: Buscar GIFs (GET api/gifs)
+activate Api
+Api -> Controller: Llama a GifController@searchGifs()
+activate Controller
+Controller -> Request: Valida datos con GifRequest
+activate Request
+Request --> Controller: Datos validados
+deactivate Request
+Controller -> Service: Llama a GifService@searchGifs()
+activate Service
+Service -> Repository: Llama a GifRepository@search()
+activate Repository
+Repository -> GiphyAPI: Realiza la consulta a la API GIPHY
+activate GiphyAPI
+GiphyAPI --> Repository: Retorna respuesta de Giphy
+deactivate GiphyAPI
+Repository --> Service: Retorna respuesta del repositorio
+deactivate Repository
+Service --> Controller: Retorna respuesta al controlador
+deactivate Service
+Controller --> Api: Retorna respuesta al API
+deactivate Controller
+Api --> Usuario: Retorna respuesta al usuario
+deactivate Api
+deactivate Usuario
+@enduml
